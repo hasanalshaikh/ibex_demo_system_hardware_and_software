@@ -312,8 +312,9 @@ module ibex_cs_registers #(
   assign illegal_csr_dbg    = dbg_csr & ~debug_mode_i;
   assign illegal_csr_priv   = (csr_addr[9:8] > {priv_lvl_q});
   assign illegal_csr_write  = (csr_addr[11:10] == 2'b11) && csr_wr;
-  assign illegal_csr_insn_o = csr_access_i & (illegal_csr | illegal_csr_write | illegal_csr_priv |
-                                              illegal_csr_dbg);
+//  assign illegal_csr_insn_o = csr_access_i & (illegal_csr | illegal_csr_write | illegal_csr_priv |
+assign illegal_csr_insn_o = csr_access_i & (illegal_csr | illegal_csr_write | 
+                                              illegal_csr_dbg); //edited here
 
   // mip CSR is purely combinational - must be able to re-enable the clock upon WFI
   assign mip.irq_software = irq_software_i;

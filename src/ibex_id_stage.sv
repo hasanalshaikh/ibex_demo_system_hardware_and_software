@@ -546,8 +546,8 @@ module ibex_id_stage #(
   // Some instructions can only be executed in M-Mode
   assign illegal_umode_insn = (priv_mode_i != PRIV_LVL_M) &
                               // MRET must be in M-Mode. TW means trap WFI to M-Mode.
-                              //(mret_insn_dec | (csr_mstatus_tw_i & wfi_insn_dec));
-                              (mret_insn_dec); //edited here
+                              (mret_insn_dec | (csr_mstatus_tw_i & wfi_insn_dec));
+                              //(mret_insn_dec); //edited here
   assign illegal_insn_o = instr_valid_i &
       (illegal_insn_dec | illegal_csr_insn_i | illegal_dret_insn | illegal_umode_insn);
 
